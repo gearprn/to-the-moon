@@ -3,6 +3,13 @@ const formatDate = (unixDate) => {
   return `${getMonth(date.getMonth + 1)} ${date.getFullYear()}`;
 };
 
+const formatFullDate = (unixDate) => {
+  const date = new Date(unixDate * 1000);
+  return `${date.getDate()} ${getMonth(
+    date.getMonth + 1
+  )} ${date.getFullYear()}, ${date.getHours()}:${date.getMinutes()}`;
+};
+
 const getMonth = (monthNum) => {
   let month;
 
@@ -48,4 +55,4 @@ const getMonth = (monthNum) => {
   return month;
 };
 
-export { formatDate };
+export { formatDate, formatFullDate };

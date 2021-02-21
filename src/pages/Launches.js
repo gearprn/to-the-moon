@@ -23,18 +23,43 @@ const years = [
 
 const Launches = () => {
   const [offset, setOffset] = useState(0);
-  const [selectYear, setSelectYear] = useState(2006);
+  const [rocketName, setRocketName] = useState("");
+  const [selectYear, setSelectYear] = useState("");
   const [launchStatus, setLaunchStatus] = useState("Default");
   const [launchesData, setLaunchesData] = useState([]);
 
   useEffect(() => {
     const fetchLaunchesData = async () => {
       await fetchLaunches({ limit: 6, offset: offset }).then((res) => {
+        console.log(res);
         setLaunchesData(res);
       });
     };
     fetchLaunchesData();
   }, [offset]);
+
+  useEffect(() => {
+    const isLaunchSuccess =
+      launchStatus === "Default"
+        ? ""
+        : launchStatus === "Success"
+        ? true
+        : false;
+    const timeOutId = setTimeout(
+      () =>
+        fetchLaunches({
+          rocketName: rocketName,
+          launchYear: selectYear,
+          launchSuccess: isLaunchSuccess,
+          limit: 6,
+          offset: offset,
+        }).then((res) => {
+          setLaunchesData(res);
+        }),
+      500
+    );
+    return () => clearTimeout(timeOutId);
+  }, [rocketName, offset, launchStatus, selectYear]);
 
   const renderLaunchCards = launchesData.map((record) => {
     return <LaunchCard key={record.flight_number} data={record} />;
@@ -85,11 +110,14 @@ const Launches = () => {
                 name="name"
                 className="ml-2"
                 autoComplete="off"
+                onChange={(event) => setRocketName(event.target.value)}
+                // value={rocketName}
               />
             </label>
             <label> Choose a year: </label>
 
             <select name="years" id="years" onChange={handleYearChange}>
+              <option value="">select</option>
               {options}
             </select>
           </form>
@@ -103,9 +131,13 @@ const Launches = () => {
           </p>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row flex-wrap">
-        {renderLaunchCards}
-      </div>
+      {launchesData.length === 0 ? (
+        <p className="mt-5 text-xl text-center">Record not found.</p>
+      ) : (
+        <div className="flex flex-col md:flex-row flex-wrap">
+          {renderLaunchCards}
+        </div>
+      )}
     </div>
   );
 };

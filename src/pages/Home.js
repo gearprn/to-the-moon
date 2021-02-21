@@ -1,18 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { fetchInfos } from "../api/index";
 
 const Home = () => {
-  return (
-    <div>
+  const [info, setInfo] = useState({});
+  useEffect(() => {
+    const fetchSpacexData = async () => {
+      await fetchInfos().then((res) => {
+        setInfo(res);
+      });
+    };
+    fetchSpacexData();
+  }, []);
+
+  return info === {} ? (
+    "fetching"
+  ) : (
+    <div className="mx-auto sm:w-full md:w-1/2 lg:w-1/3">
       <strong>
-        <h6 className="mb-3">Home //</h6>
+        <h6 className="mb-3">🛰 SpaceX //</h6>
       </strong>
-      <p className="container">
-        “You want to wake up in the morning and think the future is going to be
-        great - and that’s what being a spacefaring civilization is all about.
-        It’s about believing in the future and thinking that the future will be
-        better than the past. And I can’t think of anything more exciting than
-        going out there and being among the stars.” -Elon Musk
-      </p>
+      <p className="pl-3 mb-3">{info.summary}</p>
     </div>
   );
 };

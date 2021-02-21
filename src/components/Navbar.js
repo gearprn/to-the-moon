@@ -60,7 +60,7 @@ const Navbar = () => {
           id="example-navbar-danger"
         >
           <ul className="flex flex-col lg:flex-row list-none">
-            <li className="nav-item">
+            <li>
               <Link
                 to="/"
                 className="mr-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-black dark:text-white hover:opacity-75"
@@ -84,11 +84,15 @@ const Navbar = () => {
                 Rockets //
               </Link>
             </li>
-            <li>
-              <button type="button" onClick={() => setTheme(isDark)}>
+            <li className="flex align-middle">
+              <button
+                type="button"
+                className="focus:outline-none"
+                onClick={() => setTheme(isDark)}
+              >
                 {theme === "dark" ? (
                   <svg
-                    className="w-6 h-6 md:w-6 md:h-6 text-black dark:text-white"
+                    className="w-6 h-6 md:w-6 md:h-6 text-yellow"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -103,7 +107,7 @@ const Navbar = () => {
                   </svg>
                 ) : (
                   <svg
-                    className="w-6 h-6 md:w-6 md:h-6 text-black dark:text-white"
+                    className="w-6 h-6 md:w-6 md:h-6 text-yellow"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"

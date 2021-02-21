@@ -12,7 +12,16 @@ const Launches = () => {
     fetchLaunchesData();
   }, []);
 
-  return launchesData === "" ? "fetching ..." : <pre>{launchesData}</pre>;
+  return launchesData === "" ? (
+    "fetching ..."
+  ) : (
+    <div>
+      <strong>
+        <h6 className="mb-3">Launches //</h6>
+      </strong>
+      <pre>{launchesData}</pre>
+    </div>
+  );
 };
 
 export default Launches;

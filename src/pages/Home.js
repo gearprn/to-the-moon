@@ -3,6 +3,9 @@ import React from "react";
 const Home = () => {
   return (
     <div>
+      <strong>
+        <h6 className="mb-3">Home //</h6>
+      </strong>
       <p className="container">
         “You want to wake up in the morning and think the future is going to be
         great - and that’s what being a spacefaring civilization is all about.

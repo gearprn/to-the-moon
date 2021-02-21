@@ -8,7 +8,7 @@ const Launches = () => {
   const [launchesData, setLaunchesData] = useState([]);
   useEffect(() => {
     const fetchLaunchesData = async () => {
-      await fetchLaunches(6, offset).then((res) => {
+      await fetchLaunches({ limit: 6, offset: offset }).then((res) => {
         setLaunchesData(res);
         // setLaunchesData(JSON.stringify(res, undefined, 2));
       });
@@ -26,9 +26,9 @@ const Launches = () => {
   ) : (
     <div>
       <strong>
-        <h6 className="mb-3">🔥 Launches //</h6>
+        <h6 className='mb-3'>🔥 Launches //</h6>
       </strong>
-      <div className="flex flex-col md:flex-row flex-wrap">
+      <div className='flex flex-col md:flex-row flex-wrap'>
         {renderLaunchCards}
       </div>
     </div>

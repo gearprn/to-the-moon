@@ -8,9 +8,15 @@ const fetchRocket = (rocketId) => {
   return fetch(`${baseAPI}/rockets/${rocketId}`).then((res) => res.json());
 };
 
-const fetchLaunches = (limit = 5, offset = 0) => {
+const fetchLaunches = ({
+  launchYear = "",
+  rocketName = "",
+  launchSuccess = "",
+  limit = 5,
+  offset = 0,
+}) => {
   return fetch(
-    `${baseAPI}/launches?limit=${limit}&offset=${offset}`
+    `${baseAPI}/launches?launch_year=${launchYear}&rocket_name=${rocketName}&launch_success=${launchSuccess}&limit=${limit}&offset=${offset}`
   ).then((res) => res.json());
 };
 

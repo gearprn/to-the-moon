@@ -13,6 +13,7 @@ module.exports = {
         150: "#404854",
         200: "#1E272C",
       },
+      yellow: "#FBBF24",
     },
   },
   variants: {

@@ -13,19 +13,19 @@ const Rockets = () => {
     fetchRocketsData();
   }, []);
 
-  return rocketsData.length === 0 ? (
-    "fetching ..."
-  ) : (
-    <div>
+  return (
+    <>
       <strong>
-        <h6 className='mb-3'>🚀 Rockets //</h6>
+        <h6 className='mb-3'>Rockets //</h6>
       </strong>
       <div className='flex'>
-        {rocketsData.map((data, index) => (
-          <RocketCard data={data} key={index} />
-        ))}
+        {rocketsData.length === 0
+          ? "fetching ..."
+          : rocketsData.map((data, index) => (
+              <RocketCard data={data} key={index} />
+            ))}
       </div>
-    </div>
+    </>
   );
 };
 

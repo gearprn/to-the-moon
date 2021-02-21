@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { fetchRocket } from "../api/index";
 
 const RocketDetail = () => {
+  const { rocketId } = useParams();
   const [rocketData, setRocketData] = useState("");
   useEffect(() => {
-    const fetchLaunchData = async () => {
-      await fetchRocket("falcon1").then((res) => {
-        setRocketData(JSON.stringify(res, undefined, 2));
-      });
+    const fetchRocketData = async () => {
+      await fetchRocket(rocketId).then((res) => setRocketData(res));
     };
-    fetchLaunchData();
-  }, []);
 
-  return rocketData === "" ? "fetching ..." : <pre>{rocketData}</pre>;
+    fetchRocketData();
+  }, [rocketId]);
+
+  return !rocketData ? "fetching ..." : <pre>{rocketData.rocket_name}</pre>;
 };
 
 export default RocketDetail;

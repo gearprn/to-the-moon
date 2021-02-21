@@ -29,7 +29,7 @@ const Launches = () => {
 
   useEffect(() => {
     const fetchLaunchesData = async () => {
-      await fetchLaunches(6, offset).then((res) => {
+      await fetchLaunches({ limit: 6, offset: offset }).then((res) => {
         setLaunchesData(res);
       });
     };

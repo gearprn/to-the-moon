@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../stylesheets/RocketCard.css";
 
 const RocketCard = ({ data }) => {
   const { rocket_id, rocket_name, company, active, flickr_images } = data;
@@ -16,7 +17,9 @@ const RocketCard = ({ data }) => {
           <div className='absolute w-full bottom-3'>
             <h1 className='text-xl'>{rocket_name}</h1>
             <p className='text-base'>{company}</p>
-            <p className='text-sm'>{active ? "Active" : "Inactive"}</p>
+            <p className={`text-sm status ${active ? "active" : ""}`}>
+              {active ? "Active" : "Inactive"}
+            </p>
           </div>
         </div>
       </Link>

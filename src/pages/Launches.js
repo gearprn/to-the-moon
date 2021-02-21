@@ -1,25 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { fetchLaunches } from "../api/index";
 
+import LaunchCard from "../components/LaunchCard";
+
 const Launches = () => {
-  const [launchesData, setLaunchesData] = useState("");
+  const [offset, setOffset] = useState(0);
+  const [launchesData, setLaunchesData] = useState([]);
   useEffect(() => {
     const fetchLaunchesData = async () => {
-      await fetchLaunches().then((res) => {
-        setLaunchesData(JSON.stringify(res, undefined, 2));
+      await fetchLaunches(6, offset).then((res) => {
+        setLaunchesData(res);
+        // setLaunchesData(JSON.stringify(res, undefined, 2));
       });
     };
     fetchLaunchesData();
-  }, []);
+  }, [offset]);
+
+  const renderLaunchCards = launchesData.map((record) => {
+    console.log(record);
+    return <LaunchCard key={record.flight_number} data={record} />;
+  });
 
   return launchesData === "" ? (
     "fetching ..."
   ) : (
     <div>
       <strong>
-        <h6 className="mb-3">Launches //</h6>
+        <h6 className="mb-3">🔥 Launches //</h6>
       </strong>
-      <pre>{launchesData}</pre>
+      <div className="flex flex-col md:flex-row flex-wrap">
+        {renderLaunchCards}
+      </div>
     </div>
   );
 };

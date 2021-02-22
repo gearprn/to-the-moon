@@ -98,44 +98,44 @@ const Launches = () => {
     "fetching ..."
   ) : (
     <div>
-      <div className='flex'>
+      <div className="flex flex-wrap">
         <strong>
-          <h6 className='text-2xl mb-3'>🔥 Launches //</h6>
+          <h6 className="text-2xl mb-3 w-full">🔥 Launches //</h6>
         </strong>
-        <div className='flex ml-auto'>
-          <form className='ml-2'>
+        <div className="flex flex-wrap ml-auto">
+          <form className="ml-2">
             <label>
-              Rocket Name
+              Rocket Name:
               <input
-                type='text'
-                name='name'
-                className='ml-2'
-                autoComplete='off'
+                type="text"
+                name="name"
+                className="ml-2"
+                autoComplete="off"
                 onChange={(event) => setRocketName(event.target.value)}
                 // value={rocketName}
               />
             </label>
             <label> Choose a year: </label>
 
-            <select name='years' id='years' onChange={handleYearChange}>
-              <option value=''>select</option>
+            <select name="years" id="years" onChange={handleYearChange}>
+              <option value="">select</option>
               {options}
             </select>
           </form>
-          <p className='ml-2'>Launch Status: </p>
-          <p className='ml-2 cursor-pointer' onClick={handleLaunchStatusClick}>
+          <p className="ml-2">Launch Status: </p>
+          <p className="ml-2 cursor-pointer" onClick={handleLaunchStatusClick}>
             👈🏻
           </p>
-          <p className='w-24 text-center'> {launchStatus} </p>
-          <p className='cursor-pointer' onClick={handleLaunchStatusClick}>
+          <p className="w-24 text-center"> {launchStatus} </p>
+          <p className="cursor-pointer" onClick={handleLaunchStatusClick}>
             👉🏻
           </p>
         </div>
       </div>
       {launchesData.length === 0 ? (
-        <p className='mt-5 text-xl text-center'>Record not found.</p>
+        <p className="mt-5 text-xl text-center">Record not found.</p>
       ) : (
-        <div className='flex flex-col md:flex-row flex-wrap'>
+        <div className="flex flex-col md:flex-row flex-wrap">
           {renderLaunchCards}
         </div>
       )}

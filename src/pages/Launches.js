@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchLaunches } from "../api/index";
 
 import LaunchCard from "../components/LaunchCard";
+import "../stylesheets/Launches.css";
 
 const years = [
   2006,
@@ -57,7 +58,7 @@ const Launches = () => {
         }).then((res) => {
           setLaunchesData(res);
         }),
-      500
+      300
     );
     return () => clearTimeout(timeOutId);
   }, [rocketName, offset, launchStatus, selectYear]);
@@ -117,7 +118,12 @@ const Launches = () => {
             </label>
             <label> Choose a year: </label>
 
-            <select name="years" id="years" onChange={handleYearChange}>
+            <select
+              className="dark:text-black"
+              name="years"
+              id="years"
+              onChange={handleYearChange}
+            >
               <option value="">select</option>
               {options}
             </select>

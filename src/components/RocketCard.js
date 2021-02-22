@@ -6,7 +6,7 @@ const RocketCard = ({ data }) => {
   const { rocket_id, rocket_name, company, active, flickr_images } = data;
 
   return (
-    <div className='w-full md:w-1/2 lg:w-1/3 p-3'>
+    <div className='w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-3'>
       <Link to={`/rockets/${rocket_id}`}>
         <div className='rounded-md bg-white dark:bg-gray-150 h-auto md:h-64 shadow-md overflow-hidden cursor-pointer'>
           <img

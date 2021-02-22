@@ -118,8 +118,8 @@ const RocketDetail = () => {
 
           {rocketData?.wikipedia ? (
             <a
-              className='text-sm underline'
-              href={rocketData?.links?.wikipedia}
+              className='text-sm text-lightblue underline'
+              href={rocketData?.wikipedia}
             >
               Wikipedia
             </a>

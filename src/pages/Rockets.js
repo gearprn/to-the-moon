@@ -16,7 +16,7 @@ const Rockets = () => {
   return (
     <>
       <strong>
-        <h6 className='mb-3'>Rockets //</h6>
+        <h6 className='mb-3 text-2xl font-bold'>🚀 Rockets //</h6>
       </strong>
       <div className='flex'>
         {rocketsData.length === 0

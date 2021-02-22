@@ -27,5 +27,5 @@ html.dark .status.active::before {
 }
 
 .status.active::before {
-  background: #008000;
+  background: #33AA33;
 }

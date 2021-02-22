@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { ThemeContext } from "../contexts/ThemeContext";
 
 const Navbar = () => {
@@ -61,28 +61,32 @@ const Navbar = () => {
         >
           <ul className="flex flex-col lg:flex-row list-none">
             <li>
-              <Link
+              <NavLink
+                exact
                 to="/"
                 className="mr-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-black dark:text-white hover:opacity-75"
+                activeStyle={{ color: "#FBBF24" }}
               >
                 Home //
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 to="/launches"
                 className="mr-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-black dark:text-white hover:opacity-75"
+                activeStyle={{ color: "#FBBF24" }}
               >
                 Launches //
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 to="/rockets"
                 className="mr-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-black dark:text-white hover:opacity-75"
+                activeStyle={{ color: "#FBBF24" }}
               >
                 Rockets //
-              </Link>
+              </NavLink>
             </li>
             <li className="flex align-middle">
               <button

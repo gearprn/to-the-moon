@@ -18,7 +18,7 @@ const Rockets = () => {
       <strong>
         <h6 className='mb-3 text-2xl font-bold'>🚀 Rockets //</h6>
       </strong>
-      <div className='flex'>
+      <div className='flex flex-wrap'>
         {rocketsData.length === 0
           ? "Searching for the rockets in the warehouse ..."
           : rocketsData.map((data, index) => (

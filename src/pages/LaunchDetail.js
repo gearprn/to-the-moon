@@ -37,7 +37,7 @@ const LaunchDetail = () => {
 
         <div className="mb-4">
           <strong>
-            <p class="text-xl font-bold mb-4">⭐ Is this launch success?</p>
+            <p className="text-xl font-bold mb-4">⭐ Is this launch success?</p>
           </strong>
           <p className="text-justify">
             {`${launchData?.launch_success ? "Succeed" : "Failed"}, 
@@ -47,7 +47,7 @@ const LaunchDetail = () => {
 
         <div className="mb-4">
           <strong>
-            <p class="text-xl font-bold mb-4">
+            <p className="text-xl font-bold mb-4">
               🚀 Rocket model in this launch.
             </p>
           </strong>
@@ -63,7 +63,7 @@ const LaunchDetail = () => {
 
         <div className="mb-4">
           <strong>
-            <p class="text-xl font-bold mb-4">📷 Related images</p>
+            <p className="text-xl font-bold mb-4">📷 Related images</p>
           </strong>
           {launchData?.links?.flickr_images?.length === 0 ? (
             "Sorry, This rocket may not have any capture images."
@@ -74,7 +74,7 @@ const LaunchDetail = () => {
 
         <div className="pb-8">
           <strong>
-            <p class="text-xl font-bold mb-4">🔗 Related Resources</p>
+            <p className="text-xl font-bold mb-4">🔗 Related Resources</p>
           </strong>
           {launchData?.links?.article_link ? (
             <a

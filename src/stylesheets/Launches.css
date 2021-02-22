@@ -9,3 +9,22 @@ select {
   padding-left: 0.75rem;
   font-size: 1rem;
 }
+/* width */
+.scrollable::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+.scrollable::-webkit-scrollbar-track {
+  background: none;
+}
+
+/* Handle */
+.scrollable::-webkit-scrollbar-thumb {
+  background: #444;
+}
+
+/* Handle on hover */
+.scrollable::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

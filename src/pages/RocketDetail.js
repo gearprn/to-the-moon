@@ -42,7 +42,7 @@ const RocketDetail = () => {
 
         <div className='mb-4'>
           <strong>
-            <p class='text-xl font-bold mb-4'>🚀 Rocket overviews</p>
+            <p className='text-xl font-bold mb-4'>🚀 Rocket overviews</p>
           </strong>
 
           <div className='flex mb-2'>
@@ -90,11 +90,11 @@ const RocketDetail = () => {
 
         <div className='mb-4'>
           <strong>
-            <p class='text-xl font-bold mb-4'>📷 Related images</p>
+            <p className='text-xl font-bold mb-4'>📷 Related images</p>
           </strong>
 
           {rocketData?.flickr_images?.length === 0 ? (
-            <p class='text-base'>
+            <p className='text-base'>
               Sorry, This rocket may not have any capture images.
             </p>
           ) : (
@@ -113,7 +113,7 @@ const RocketDetail = () => {
 
         <div className='pb-8'>
           <strong>
-            <p class='text-xl font-bold mb-4'>🔗 Related Resources</p>
+            <p className='text-xl font-bold mb-4'>🔗 Related Resources</p>
           </strong>
 
           {rocketData?.wikipedia ? (

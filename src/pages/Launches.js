@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { fetchLaunches } from "../api/index";
-
 import LaunchCard from "../components/LaunchCard";
 import "../stylesheets/Launches.css";
 
@@ -31,14 +30,12 @@ const Launches = () => {
 
   useEffect(() => {
     const fetchLaunchesData = async () => {
-      await fetchLaunches({ limit: 6, offset: offset }).then((res) => {
-        console.log(res);
+      await fetchLaunches({ limit: 10, offset: 0 }).then((res) => {
         setLaunchesData(res);
       });
     };
-
     fetchLaunchesData();
-  }, [offset]);
+  }, []);
 
   useEffect(() => {
     const isLaunchSuccess =
@@ -53,15 +50,21 @@ const Launches = () => {
           rocketName: rocketName,
           launchYear: selectYear,
           launchSuccess: isLaunchSuccess,
-          limit: 6,
+          limit: 10,
           offset: offset,
         }).then((res) => {
-          setLaunchesData(res);
+          setLaunchesData([...launchesData, ...res]);
         }),
       300
     );
     return () => clearTimeout(timeOutId);
-  }, [rocketName, offset, launchStatus, selectYear]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rocketName, launchStatus, selectYear, offset]);
+
+  useEffect(() => {
+    setLaunchesData([]);
+    setOffset(0);
+  }, [rocketName, launchStatus, selectYear]);
 
   const renderLaunchCards = launchesData.map((record) => {
     return <LaunchCard key={record.flight_number} data={record} />;
@@ -95,10 +98,19 @@ const Launches = () => {
     }
   };
 
+  const handleScrolling = (e) => {
+    const { scrollHeight, scrollTop, clientHeight } = e.target;
+    console.log({ scrollHeight, scrollTop, clientHeight });
+    if (clientHeight + scrollTop + 3 > scrollTop) {
+      // do something at end of scroll
+      setOffset(offset + 10);
+    }
+  };
+
   return launchesData === "" ? (
     "fetching ..."
   ) : (
-    <div>
+    <>
       <div className="flex flex-wrap">
         <strong>
           <h6 className="text-2xl mb-3 w-full">🔥 Launches //</h6>
@@ -141,11 +153,14 @@ const Launches = () => {
       {launchesData.length === 0 ? (
         <p className="mt-5 text-xl text-center">Record not found.</p>
       ) : (
-        <div className="flex flex-col md:flex-row flex-wrap">
+        <div
+          className="flex flex-col md:flex-row flex-wrap h-screen overflow-y-auto overscroll-auto scrollable"
+          onScroll={handleScrolling}
+        >
           {renderLaunchCards}
         </div>
       )}
-    </div>
+    </>
   );
 };
 

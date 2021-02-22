@@ -21,7 +21,7 @@ const LaunchCard = (props) => {
             alt=''
           />
           <div className='absolute bottom-3'>
-            <p className='text-xl mb-3'>{mission_name}</p>
+            <p className='text-xl tracking-wide mb-3'>{mission_name}</p>
             <div className='flex justify-between gap-5'>
               <div>
                 <p className='text-sm font-light'>Launch on</p>

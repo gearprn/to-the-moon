@@ -7,7 +7,7 @@ const formatFullDate = (unixDate) => {
   const date = new Date(unixDate * 1000);
   return `${date.getDate()} ${getMonth(
     date.getMonth + 1
-  )} ${date.getFullYear()}, ${date.getHours()}:${date.getMinutes()}`;
+  )} ${date.getFullYear()}, ${date.getHours()}:${date.getMinutes()} UTC`;
 };
 
 const getMonth = (monthNum) => {

@@ -20,7 +20,7 @@ const Rockets = () => {
       </strong>
       <div className='flex'>
         {rocketsData.length === 0
-          ? "fetching ..."
+          ? "Searching for the rockets in the warehouse ..."
           : rocketsData.map((data, index) => (
               <RocketCard data={data} key={index} />
             ))}

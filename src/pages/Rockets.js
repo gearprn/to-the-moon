@@ -1,26 +1,31 @@
 import React, { useEffect, useState } from "react";
+import RocketCard from "../components/RocketCard";
 import { fetchRockets } from "../api/index";
 
 const Rockets = () => {
-  const [rocketsData, setRocketsData] = useState("");
+  const [rocketsData, setRocketsData] = useState([]);
+
   useEffect(() => {
-    const fetchLaunchData = async () => {
-      await fetchRockets().then((res) => {
-        setRocketsData(JSON.stringify(res, undefined, 2));
-      });
+    const fetchRocketsData = async () => {
+      fetchRockets().then((res) => setRocketsData(res));
     };
-    fetchLaunchData();
+
+    fetchRocketsData();
   }, []);
 
-  return rocketsData === "" ? (
-    "fetching ..."
-  ) : (
-    <div>
+  return (
+    <>
       <strong>
-        <h6 className="mb-3">Rockets //</h6>
+        <h6 className='mb-3 text-2xl font-bold'>🚀 Rockets //</h6>
       </strong>
-      <pre>{rocketsData}</pre>
-    </div>
+      <div className='flex flex-wrap'>
+        {rocketsData.length === 0
+          ? "Searching for the rockets in the warehouse ..."
+          : rocketsData.map((data, index) => (
+              <RocketCard data={data} key={index} />
+            ))}
+      </div>
+    </>
   );
 };
 

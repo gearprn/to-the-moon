@@ -22,7 +22,9 @@ const Rockets = () => {
         {rocketsData.length === 0
           ? "Searching for the rockets in the warehouse ..."
           : rocketsData.map((data, index) => (
-              <RocketCard data={data} key={index} />
+              <div className='w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-3'>
+                <RocketCard data={data} key={index} />
+              </div>
             ))}
       </div>
     </>

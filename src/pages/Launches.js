@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { fetchLaunches } from "../api/index";
-import LaunchCard from "../components/LaunchCard";
-import "../stylesheets/Launches.css";
+import React, { useEffect, useState } from 'react';
+import { fetchLaunches } from '../api/index';
+import LaunchCard from '../components/LaunchCard';
+import '../stylesheets/Launches.css';
 
 const years = [
   2006,
@@ -23,9 +23,9 @@ const years = [
 
 const Launches = () => {
   const [offset, setOffset] = useState(0);
-  const [rocketName, setRocketName] = useState("");
-  const [selectYear, setSelectYear] = useState("");
-  const [launchStatus, setLaunchStatus] = useState("Default");
+  const [rocketName, setRocketName] = useState('');
+  const [selectYear, setSelectYear] = useState('');
+  const [launchStatus, setLaunchStatus] = useState('Default');
   const [launchesData, setLaunchesData] = useState([]);
 
   useEffect(() => {
@@ -39,9 +39,9 @@ const Launches = () => {
 
   useEffect(() => {
     const isLaunchSuccess =
-      launchStatus === "Default"
-        ? ""
-        : launchStatus === "Success"
+      launchStatus === 'Default'
+        ? ''
+        : launchStatus === 'Success'
         ? true
         : false;
     const timeOutId = setTimeout(
@@ -83,18 +83,18 @@ const Launches = () => {
   };
 
   const handleLaunchStatusClick = (e) => {
-    if (launchStatus === "Default" && e.target.innerHTML === "👈🏻") {
-      setLaunchStatus("Failed");
-    } else if (launchStatus === "Failed" && e.target.innerHTML === "👈🏻") {
-      setLaunchStatus("Success");
-    } else if (launchStatus === "Success" && e.target.innerHTML === "👈🏻") {
-      setLaunchStatus("Default");
-    } else if (launchStatus === "Default" && e.target.innerHTML === "👉🏻") {
-      setLaunchStatus("Success");
-    } else if (launchStatus === "Success" && e.target.innerHTML === "👉🏻") {
-      setLaunchStatus("Failed");
-    } else if (launchStatus === "Failed" && e.target.innerHTML === "👉🏻") {
-      setLaunchStatus("Default");
+    if (launchStatus === 'Default' && e.target.innerHTML === '👈🏻') {
+      setLaunchStatus('Failed');
+    } else if (launchStatus === 'Failed' && e.target.innerHTML === '👈🏻') {
+      setLaunchStatus('Success');
+    } else if (launchStatus === 'Success' && e.target.innerHTML === '👈🏻') {
+      setLaunchStatus('Default');
+    } else if (launchStatus === 'Default' && e.target.innerHTML === '👉🏻') {
+      setLaunchStatus('Success');
+    } else if (launchStatus === 'Success' && e.target.innerHTML === '👉🏻') {
+      setLaunchStatus('Failed');
+    } else if (launchStatus === 'Failed' && e.target.innerHTML === '👉🏻') {
+      setLaunchStatus('Default');
     }
   };
 
@@ -107,8 +107,8 @@ const Launches = () => {
     }
   };
 
-  return launchesData === "" ? (
-    "fetching ..."
+  return launchesData === '' ? (
+    'fetching ...'
   ) : (
     <>
       <div className="flex flex-wrap">

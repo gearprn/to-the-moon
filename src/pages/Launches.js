@@ -16,6 +16,7 @@ const Launches = () => {
   const [launchStatus, setLaunchStatus] = useState('');
   const [launchesData, setLaunchesData] = useState([]);
 
+  // when page load for the first time.
   useEffect(() => {
     const fetchLaunchesData = async () => {
       await fetchLaunches({ limit: 10, offset: 0 }).then((res) => {
@@ -25,26 +26,43 @@ const Launches = () => {
     fetchLaunchesData();
   }, []);
 
+  // for when offset change
   useEffect(() => {
     const isLaunchSuccess =
-      launchStatus === '' ? '' : launchStatus === 'success' ? true : false;
+      launchStatus === '' ? '' : launchStatus === 'Success' ? true : false;
 
-    const timeOutId = setTimeout(
-      () =>
-        fetchLaunches({
-          rocketName: rocketName,
-          launchYear: selectYear,
-          launchSuccess: isLaunchSuccess,
-          limit: 10,
-          offset: offset,
-        }).then((res) => {
-          setLaunchesData(res);
-        }),
-      0
-    );
-    return () => clearTimeout(timeOutId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rocketName, launchStatus, selectYear, offset]);
+    const fetchLaunchesData = async () => {
+      await fetchLaunches({
+        rocketName: rocketName,
+        launchYear: selectYear,
+        launchSuccess: isLaunchSuccess,
+        limit: 10,
+        offset: offset,
+      }).then((res) => {
+        setLaunchesData([...launchesData, ...res]);
+      });
+    };
+    fetchLaunchesData();
+  }, [offset]);
+
+  // for when rocketName, selectYear, launchStatus change
+  useEffect(() => {
+    const isLaunchSuccess =
+      launchStatus === '' ? '' : launchStatus === 'Success' ? true : false;
+
+    const fetchLaunchesData = async () => {
+      await fetchLaunches({
+        rocketName: rocketName,
+        launchYear: selectYear,
+        launchSuccess: isLaunchSuccess,
+        limit: 10,
+        offset: 0,
+      }).then((res) => {
+        setLaunchesData(res);
+      });
+    };
+    fetchLaunchesData();
+  }, [rocketName, launchStatus, selectYear]);
 
   const renderLaunchCards = launchesData.map((record) => {
     return <LaunchCard key={record.flight_number} data={record} />;
@@ -87,14 +105,22 @@ const Launches = () => {
     setLaunchStatus(e.target.value);
   };
 
-  const handleScrolling = (e) => {
+  const debounce = (func, delay) => {
+    let inDebounce;
+    return function () {
+      const context = this;
+      const args = arguments;
+      clearTimeout(inDebounce);
+      inDebounce = setTimeout(() => func.apply(context, args), delay);
+    };
+  };
+
+  const handleScrolling = debounce((e) => {
     const { scrollHeight, scrollTop, clientHeight } = e.target;
-    console.log({ scrollHeight, scrollTop, clientHeight });
-    if (clientHeight + scrollTop + 3 > scrollTop) {
-      // do something at end of scroll
+    if (clientHeight + scrollTop + 3 >= scrollHeight) {
       setOffset(offset + 10);
     }
-  };
+  }, 120);
 
   return launchesData === '' ? (
     'fetching ...'
@@ -106,12 +132,6 @@ const Launches = () => {
         </strong>
         <div className="flex flex-wrap ml-auto">
           <form className="ml-2">
-            {/* <label>
-              Rocket Name:
-              
-            </label>
-            <label> Choose a year: </label> */}
-
             <select
               className="dark:text-black w-36 rounded-sm mr-2"
               onChange={handleRocketNameChange}
@@ -142,8 +162,8 @@ const Launches = () => {
         <p className="mt-5 text-xl text-center">Record not found.</p>
       ) : (
         <div
-          className="flex flex-col md:flex-row flex-wrap overflow-y-auto overscroll-auto scrollable"
-          // onScroll={handleScrolling}
+          className="flex flex-col md:flex-row flex-wrap h-screen overflow-y-auto overscroll-auto scrollable"
+          onScroll={handleScrolling}
         >
           {renderLaunchCards}
         </div>

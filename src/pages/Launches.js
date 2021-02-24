@@ -43,6 +43,7 @@ const Launches = () => {
       });
     };
     fetchLaunchesData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [offset]);
 
   // for when rocketName, selectYear, launchStatus change

@@ -18,15 +18,15 @@ const Home = () => {
     <div className='mx-auto sm:w-full md:w-1/2 lg:w-1/3'>
       <section className='mb-4'>
         <h6 className='text-xl mb-3'>🛰 SpaceX //</h6>
-        <p className='pl-5 mb-3 text-justify'>{info.summary}</p>
+        <p className='mb-3 text-justify'>{info.summary}</p>
       </section>
       <section className='mb-4'>
         <h6 className='text-xl mb-3'>🏢 Headquarters //</h6>
-        <p className='pl-5 mb-3'>{`${info?.headquarters?.address}, ${info?.headquarters?.city}, ${info?.headquarters?.state}`}</p>
+        <p className='mb-3'>{`${info?.headquarters?.address}, ${info?.headquarters?.city}, ${info?.headquarters?.state}`}</p>
       </section>
       <section className='mb-4'>
         <h6 className='text-xl mb-3'>🔗 Related Links //</h6>
-        <p className='pl-5 mb-3'>
+        <p className='mb-3'>
           <a
             className='text-sm text-lightblue underline mr-2'
             href={info?.links?.elon_twitter}

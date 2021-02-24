@@ -125,14 +125,14 @@ const Launches = () => {
     'fetching ...'
   ) : (
     <>
-      <div className="flex flex-wrap">
-        <strong>
-          <h6 className="text-2xl mb-3 w-full">🔥 Launches //</h6>
-        </strong>
-        <div className="flex flex-wrap ml-auto">
-          <form className="ml-2">
+      <div className="flex flex-wrap items-center gap-3">
+        <h6 className="inline-block text-2xl mb-3 w-full md:w-auto md:mr-auto">
+          🔥 Launches //
+        </h6>
+        <div className="flex flex-wrap items-center gap-3 sm:inline-block md:ml-auto">
+          <form className="mx-2">
             <select
-              className="dark:text-black w-36 rounded-sm mr-2"
+              className="dark:text-black rounded-sm mb-2 mr-2 w-full sm:w-36"
               onChange={handleRocketNameChange}
             >
               <option value="">Rocket Name</option>
@@ -140,7 +140,7 @@ const Launches = () => {
             </select>
 
             <select
-              className="dark:text-black w-36 rounded-sm mr-2"
+              className="dark:text-black rounded-sm mb-2 mr-2 w-full sm:w-36"
               onChange={handleYearChange}
             >
               <option value="">Year</option>
@@ -148,7 +148,7 @@ const Launches = () => {
             </select>
 
             <select
-              className="dark:text-black w-36 rounded-sm"
+              className="dark:text-black rounded-sm mb-2 w-full sm:w-36"
               onChange={handleStatusChange}
             >
               <option value="">Launch Status</option>
@@ -161,7 +161,7 @@ const Launches = () => {
         <p className="mt-5 text-xl text-center">Record not found.</p>
       ) : (
         <div
-          className="flex flex-col md:flex-row flex-wrap h-screen overflow-y-auto overscroll-auto scrollable"
+          className="mt-2 flex flex-wrap h-screen overflow-y-auto overscroll-auto scrollable"
           onScroll={handleScrolling}
         >
           {renderLaunchCards}

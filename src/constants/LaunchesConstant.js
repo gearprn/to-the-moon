@@ -18,6 +18,6 @@ const yearsConst = [
 
 const rocketNamesConst = ['Falcon 1', 'Falcon 9', 'Falcon Heavy', 'Starship'];
 
-const launchStatusConst = ['success', 'failed'];
+const launchStatusConst = ['Success', 'Failed'];
 
 export { yearsConst, rocketNamesConst, launchStatusConst };

@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { fetchLaunches } from "../api/index";
-import LaunchCard from "../components/LaunchCard";
-import "../stylesheets/Launches.css";
+import React, { useEffect, useState } from 'react';
+import { fetchLaunches } from '../api/index';
+import LaunchCard from '../components/LaunchCard';
+import '../stylesheets/Launches.css';
 
 import {
   yearsConst,
   rocketNamesConst,
   launchStatusConst,
-} from "../constants/LaunchesConstant";
+} from '../constants/LaunchesConstant';
 
 const Launches = () => {
   const [offset, setOffset] = useState(0);
-  const [rocketName, setRocketName] = useState("");
-  const [selectYear, setSelectYear] = useState("");
-  const [launchStatus, setLaunchStatus] = useState("");
+  const [rocketName, setRocketName] = useState('');
+  const [selectYear, setSelectYear] = useState('');
+  const [launchStatus, setLaunchStatus] = useState('');
   const [launchesData, setLaunchesData] = useState([]);
 
   // when page load for the first time.
@@ -29,7 +29,7 @@ const Launches = () => {
   // for when offset change
   useEffect(() => {
     const isLaunchSuccess =
-      launchStatus === "" ? "" : launchStatus === "Success" ? true : false;
+      launchStatus === '' ? '' : launchStatus === 'Success' ? true : false;
 
     const fetchLaunchesData = async () => {
       await fetchLaunches({
@@ -48,7 +48,7 @@ const Launches = () => {
   // for when rocketName, selectYear, launchStatus change
   useEffect(() => {
     const isLaunchSuccess =
-      launchStatus === "" ? "" : launchStatus === "Success" ? true : false;
+      launchStatus === '' ? '' : launchStatus === 'Success' ? true : false;
 
     const fetchLaunchesData = async () => {
       await fetchLaunches({
@@ -121,47 +121,47 @@ const Launches = () => {
     }
   }, 120);
 
-  return launchesData === "" ? (
-    "fetching ..."
+  return launchesData === '' ? (
+    'fetching ...'
   ) : (
     <>
-      <div className='flex flex-wrap items-center gap-3'>
-        <h6 className='inline-block text-2xl mb-3 w-full md:w-auto md:mr-auto'>
+      <div className="flex flex-wrap items-center gap-3">
+        <h6 className="inline-block text-2xl mb-3 w-full md:w-auto md:mr-auto">
           🔥 Launches //
         </h6>
-        <div className='flex flex-wrap items-center gap-3 sm:inline-block md:ml-auto'>
-          <form className='mx-2'>
+        <div className="flex flex-wrap items-center gap-3 sm:inline-block md:ml-auto">
+          <form className="mx-2">
             <select
-              className='dark:text-black rounded-sm mr-2 w-full sm:w-36'
+              className="dark:text-black rounded-sm mb-2 mr-2 w-full sm:w-36"
               onChange={handleRocketNameChange}
             >
-              <option value=''>Rocket Name</option>
+              <option value="">Rocket Name</option>
               {rocketOptions}
             </select>
 
             <select
-              className='dark:text-black rounded-sm mr-2 w-full sm:w-36'
+              className="dark:text-black rounded-sm mb-2 mr-2 w-full sm:w-36"
               onChange={handleYearChange}
             >
-              <option value=''>Year</option>
+              <option value="">Year</option>
               {yearOptions}
             </select>
 
             <select
-              className='dark:text-black rounded-sm w-full sm:w-36'
+              className="dark:text-black rounded-sm mb-2 w-full sm:w-36"
               onChange={handleStatusChange}
             >
-              <option value=''>Launch Status</option>
+              <option value="">Launch Status</option>
               {statusOptions}
             </select>
           </form>
         </div>
       </div>
       {launchesData.length === 0 ? (
-        <p className='mt-5 text-xl text-center'>Record not found.</p>
+        <p className="mt-5 text-xl text-center">Record not found.</p>
       ) : (
         <div
-          className='flex flex-col md:flex-row flex-wrap h-screen overflow-y-auto overscroll-auto scrollable'
+          className="mt-2 flex flex-wrap h-screen overflow-y-auto overscroll-auto scrollable"
           onScroll={handleScrolling}
         >
           {renderLaunchCards}

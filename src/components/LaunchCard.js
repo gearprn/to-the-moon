@@ -11,7 +11,7 @@ const LaunchCard = (props) => {
     flight_number,
   } = props.data;
 
-  console.log(mission_patch_small);
+  // console.log(mission_patch_small);
 
   return (
     <div className="p-2 w-full md:w-1/2 lg:w-1/3">

@@ -18,68 +18,57 @@ const Launches = () => {
 
   useEffect(() => {
     const fetchLaunchesData = async () => {
-      await fetchLaunches({
-        rocketName: rocketName,
-        launchYear: selectYear,
-        launchSuccess: launchStatus,
-        limit: 10,
-        offset: 0,
-      }).then((res) => {
-        console.log(res);
+      await fetchLaunches({ limit: 10, offset: 0 }).then((res) => {
         setLaunchesData(res);
       });
     };
     fetchLaunchesData();
-  }, [rocketName, selectYear, launchStatus]);
+  }, []);
 
   useEffect(() => {
-    console.log('select value', '=>', rocketName, selectYear, launchStatus);
-    fetchLaunches({
-      rocketName: rocketName,
-      launchYear: selectYear,
-      launchSuccess: launchStatus,
-      limit: 10,
-      offset: offset,
-    }).then((res) => {
-      setLaunchesData([res]);
-    });
+    const isLaunchSuccess =
+      launchStatus === '' ? '' : launchStatus === 'success' ? true : false;
+
+    const timeOutId = setTimeout(
+      () =>
+        fetchLaunches({
+          rocketName: rocketName,
+          launchYear: selectYear,
+          launchSuccess: isLaunchSuccess,
+          limit: 10,
+          offset: offset,
+        }).then((res) => {
+          setLaunchesData(res);
+        }),
+      0
+    );
+    return () => clearTimeout(timeOutId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rocketName, launchStatus, selectYear, offset]);
 
-  useEffect(() => {
-    setLaunchesData([]);
-    setOffset(0);
-  }, [rocketName, launchStatus, selectYear]);
-
   const renderLaunchCards = launchesData.map((record) => {
-    // console.log(record.flight_number);
-    return (
-      <LaunchCard
-        key={record.flight_number + record.mission_name}
-        data={record}
-      />
-    );
+    return <LaunchCard key={record.flight_number} data={record} />;
   });
 
-  const rocketsOptions = rocketNamesConst.map((rocket) => {
+  const rocketOptions = rocketNamesConst.map((rocket, index) => {
     return (
-      <option key={rocket} value={`${rocket}`}>
+      <option key={index} value={`${rocket}`}>
         {rocket}
       </option>
     );
   });
 
-  const yearOptions = yearsConst.map((year) => {
+  const yearOptions = yearsConst.map((year, index) => {
     return (
-      <option key={year} value={`${year}`}>
+      <option key={index} value={`${year}`}>
         {year}
       </option>
     );
   });
 
-  const statusOptions = launchStatusConst.map((status) => {
+  const statusOptions = launchStatusConst.map((status, index) => {
     return (
-      <option key={status} value={`${status}`}>
+      <option key={index} value={`${status}`}>
         {status}
       </option>
     );
@@ -90,16 +79,17 @@ const Launches = () => {
   };
 
   const handleYearChange = (e) => {
+    console.log();
     setSelectYear(e.target.value);
   };
 
-  const handleLaunchStatusChange = (e) => {
+  const handleStatusChange = (e) => {
     setLaunchStatus(e.target.value);
   };
 
   const handleScrolling = (e) => {
     const { scrollHeight, scrollTop, clientHeight } = e.target;
-    // console.log({ scrollHeight, scrollTop, clientHeight });
+    console.log({ scrollHeight, scrollTop, clientHeight });
     if (clientHeight + scrollTop + 3 > scrollTop) {
       // do something at end of scroll
       setOffset(offset + 10);
@@ -116,27 +106,33 @@ const Launches = () => {
         </strong>
         <div className="flex flex-wrap ml-auto">
           <form className="ml-2">
-            <label>Rocket Name</label>
+            {/* <label>
+              Rocket Name:
+              
+            </label>
+            <label> Choose a year: </label> */}
 
             <select
-              className="dark:text-black"
+              className="dark:text-black w-36 rounded-sm mr-2"
               onChange={handleRocketNameChange}
             >
-              <option value="">select</option>
-              {rocketsOptions}
+              <option value="">Rocket Name</option>
+              {rocketOptions}
             </select>
-            <label>Year</label>
-
-            <select className="dark:text-black" onChange={handleYearChange}>
-              <option value="">select</option>
-              {yearOptions}
-            </select>
-            <label>Launch Status</label>
 
             <select
-              className="dark:text-black"
-              onChange={handleLaunchStatusChange}
+              className="dark:text-black w-36 rounded-sm mr-2"
+              onChange={handleYearChange}
             >
+              <option value="">Year</option>
+              {yearOptions}
+            </select>
+
+            <select
+              className="dark:text-black w-36 rounded-sm"
+              onChange={handleStatusChange}
+            >
+              <option value="">Launch Status</option>
               {statusOptions}
             </select>
           </form>
@@ -146,7 +142,7 @@ const Launches = () => {
         <p className="mt-5 text-xl text-center">Record not found.</p>
       ) : (
         <div
-          className="flex flex-col md:flex-row flex-wrap h-screen overflow-y-auto overscroll-auto scrollable"
+          className="flex flex-col md:flex-row flex-wrap overflow-y-auto overscroll-auto scrollable"
           // onScroll={handleScrolling}
         >
           {renderLaunchCards}

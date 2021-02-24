@@ -1,6 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { formatDate } from "../utils/DateFormat";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { formatDate } from '../utils/DateFormat';
 
 const LaunchCard = (props) => {
   const {
@@ -10,6 +10,8 @@ const LaunchCard = (props) => {
     links: { mission_patch_small },
     flight_number,
   } = props.data;
+
+  // console.log(mission_patch_small);
 
   return (
     <div className="p-2 w-full md:w-1/2 lg:w-1/3">
@@ -29,7 +31,7 @@ const LaunchCard = (props) => {
               </div>
               <div>
                 <p className="text-sm font-light">Launch status</p>
-                <p>{launch_success ? "Success" : "Failed"}</p>
+                <p>{launch_success ? 'Success' : 'Failed'}</p>
               </div>
             </div>
           </div>

@@ -97,7 +97,6 @@ const Launches = () => {
   };
 
   const handleYearChange = (e) => {
-    console.log();
     setSelectYear(e.target.value);
   };
 

@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { fetchInfos } from "../api/index";
+import React, { useEffect, useState } from 'react';
+import { fetchInfos } from '../api/index';
 
 const Home = () => {
   const [info, setInfo] = useState({});
   useEffect(() => {
     const fetchSpacexData = async () => {
       await fetchInfos().then((res) => {
-        console.log(res);
         setInfo(res);
       });
     };
@@ -14,7 +13,7 @@ const Home = () => {
   }, []);
 
   return info === {} ? (
-    "fetching"
+    'fetching'
   ) : (
     <div className="mx-auto sm:w-full md:w-1/2 lg:w-1/3">
       <strong>
